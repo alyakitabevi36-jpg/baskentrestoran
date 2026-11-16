@@ -1,0 +1,13 @@
+{
+  "name": "baskent-restoran-qr-menu",
+  "version": "1.0.0",
+  "description": "BAŞKENT RESTORAN — Tam Peşəkar 4 Dilli QR Menyu və Admin Panel Sistemi",
+  "type": "module",
+  "main": "server.mjs",
+  "scripts": {
+    "start": "node --no-warnings server.mjs"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}

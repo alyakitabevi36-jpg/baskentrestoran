@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>BAŞKENT RESTORAN — Admin Panel</title>
+  <meta name="theme-color" content="#0a0a0c" />
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <div class="brand-crest">B</div>
+        <div class="brand-text">
+          <h1>BAŞKENT RESTORAN</h1>
+          <span>ADMIN PANEL</span>
+        </div>
+      </div>
+      <div id="adminHeaderActions" style="display:none; gap:8px; align-items:center;">
+        <a href="/menu" target="_blank" class="btn btn-outline btn-sm">Menyuya bax</a>
+        <button id="logoutBtn" class="btn btn-danger btn-sm">Çıxış</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Login View -->
+  <section id="loginView" class="login-container">
+    <form id="loginForm" class="login-card">
+      <h2>Admin Girişi</h2>
+      <p>BAŞKENT RESTORAN idarəetmə panelinə daxil olun</p>
+      <div class="form-group">
+        <label class="form-label" for="loginEmail">E-poçt</label>
+        <input type="email" id="loginEmail" class="form-control" placeholder="admin@baskent.az" required autocomplete="username" />
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="loginPassword">Şifrə</label>
+        <input type="password" id="loginPassword" class="form-control" placeholder="••••••••" required autocomplete="current-password" />
+      </div>
+      <div id="loginError" style="color: var(--danger); font-size: 13px; margin-bottom: 12px; display:none;"></div>
+      <button type="submit" class="btn btn-gold btn-block" id="loginSubmitBtn">Daxil ol</button>
+    </form>
+  </section>
+
+  <!-- Dashboard View -->
+  <main id="dashboardView" class="admin-wrap" style="display:none;">
+    <div class="admin-tabs">
+      <button class="admin-tab active" data-tab="dishes">Yeməklər</button>
+      <button class="admin-tab" data-tab="categories">Kateqoriyalar</button>
+      <button class="admin-tab" data-tab="ingredients">İnqrediyentlər</button>
+      <button class="admin-tab" data-tab="settings">Təhlükəsizlik</button>
+    </div>
+
+    <!-- DISHES TAB -->
+    <section id="tab-dishes">
+      <div style="display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:14px;">
+        <select id="adminCatFilter" class="form-control" style="max-width:240px;"></select>
+        <button id="addDishBtn" class="btn btn-gold">+ Yeni Yemək Əlavə Et</button>
+      </div>
+      <div id="adminDishesList"></div>
+    </section>
+
+    <!-- CATEGORIES TAB -->
+    <section id="tab-categories" style="display:none;">
+      <div style="display:flex; justify-content:flex-end; margin-bottom:14px;">
+        <button id="addCatBtn" class="btn btn-gold">+ Yeni Kateqoriya</button>
+      </div>
+      <div id="adminCatsList"></div>
+    </section>
+
+    <!-- INGREDIENTS TAB -->
+    <section id="tab-ingredients" style="display:none;">
+      <div style="display:flex; justify-content:flex-end; margin-bottom:14px;">
+        <button id="addIngBtn" class="btn btn-gold">+ Yeni İnqrediyent</button>
+      </div>
+      <div id="adminIngsList" class="grid-2"></div>
+    </section>
+
+    <!-- SETTINGS TAB -->
+    <section id="tab-settings" style="display:none;">
+      <div class="panel-card" style="max-width:480px;">
+        <h3 style="color:var(--gold-light); margin-bottom:12px;">Şifrəni Dəyiş</h3>
+        <form id="changePwdForm">
+          <div class="form-group">
+            <label class="form-label">Cari şifrə</label>
+            <input type="password" id="curPwd" class="form-control" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Yeni şifrə (min. 6 simvol)</label>
+            <input type="password" id="newPwd" class="form-control" minlength="6" required />
+          </div>
+          <button type="submit" class="btn btn-gold">Şifrəni Yenilə</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Dish Editor Modal -->
+  <div class="detail-overlay" id="dishModal">
+    <div class="detail-card" style="padding:20px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+        <h3 id="dishModalTitle" style="color:var(--gold-light); font-family:var(--font-display);">Yemək</h3>
+        <button type="button" class="btn btn-outline btn-sm" id="closeDishModal">Bağla</button>
+      </div>
+
+      <form id="dishForm">
+        <input type="hidden" id="dishId" />
+        <div class="grid-2">
+          <div class="form-group">
+            <label class="form-label">Kateqoriya</label>
+            <select id="dishCategory" class="form-control" required></select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Qiymət (AZN)</label>
+            <input type="number" step="0.01" min="0" id="dishPrice" class="form-control" required />
+          </div>
+        </div>
+
+        <div class="form-group" style="display:flex; align-items:center; gap:10px;">
+          <input type="checkbox" id="dishAvailable" checked style="width:18px; height:18px; accent-color:var(--gold);" />
+          <label for="dishAvailable" style="font-size:14px; cursor:pointer;">Menyuda mövcuddur (Aktiv)</label>
+        </div>
+
+        <!-- 4 Language Fields -->
+        <div class="panel-card" style="background:var(--bg-secondary);">
+          <div class="lang-tabs-mini" id="dishLangTabs">
+            <button type="button" class="lang-tab-mini active" data-l="az">AZ (Azərbaycan)</button>
+            <button type="button" class="lang-tab-mini" data-l="en">EN (English)</button>
+            <button type="button" class="lang-tab-mini" data-l="ru">RU (Русский)</button>
+            <button type="button" class="lang-tab-mini" data-l="tr">TR (Türkçe)</button>
+          </div>
+
+          <div id="dishLangFields"></div>
+        </div>
+
+        <!-- Images Upload & Gallery -->
+        <div class="panel-card" style="background:var(--bg-secondary);">
+          <label class="form-label">Yemək Şəkilləri (Bir neçə şəkil yükləmək olar)</label>
+          <label class="upload-zone" style="display:block;">
+            <input type="file" id="dishImagesInput" accept="image/*" multiple style="display:none;" />
+            <div style="color:var(--gold-light); font-weight:600; font-size:14px;">📱 Qalereyadan şəkil seçin</div>
+            <div style="color:var(--text-muted); font-size:12px; margin-top:4px;">Şəkillər avtomatik optimallaşdırılır</div>
+          </label>
+          <div class="image-preview-grid" id="dishImagesPreview"></div>
+        </div>
+
+        <!-- Ingredients Picker -->
+        <div class="panel-card" style="background:var(--bg-secondary);">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <label class="form-label" style="margin:0;">İnqrediyentlər (Şəkil və yazı ilə)</label>
+            <button type="button" class="btn btn-outline btn-sm" id="quickAddIngBtn">+ Yeni inqrediyent</button>
+          </div>
+          <div class="ing-select-grid" id="dishIngsPicker"></div>
+        </div>
+
+        <button type="submit" class="btn btn-gold btn-block" id="saveDishBtn">Yadda Saxla</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Category Modal -->
+  <div class="detail-overlay" id="catModal">
+    <div class="detail-card" style="max-width:480px; padding:20px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+        <h3 id="catModalTitle" style="color:var(--gold-light);">Kateqoriya</h3>
+        <button type="button" class="btn btn-outline btn-sm" id="closeCatModal">Bağla</button>
+      </div>
+      <form id="catForm">
+        <input type="hidden" id="catId" />
+        <div class="form-group"><label class="form-label">Ad (AZ)</label><input id="catAz" class="form-control" required /></div>
+        <div class="form-group"><label class="form-label">Ad (EN)</label><input id="catEn" class="form-control" required /></div>
+        <div class="form-group"><label class="form-label">Ad (RU)</label><input id="catRu" class="form-control" required /></div>
+        <div class="form-group"><label class="form-label">Ad (TR)</label><input id="catTr" class="form-control" required /></div>
+        <div class="form-group"><label class="form-label">Sıra nömrəsi</label><input type="number" id="catOrder" class="form-control" value="1" /></div>
+        <button type="submit" class="btn btn-gold btn-block">Yadda Saxla</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Ingredient Modal -->
+  <div class="detail-overlay" id="ingModal">
+    <div class="detail-card" style="max-width:480px; padding:20px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+        <h3 id="ingModalTitle" style="color:var(--gold-light);">İnqrediyent</h3>
+        <button type="button" class="btn btn-outline btn-sm" id="closeIngModal">Bağla</button>
+      </div>
+      <form id="ingForm">
+        <input type="hidden" id="ingId" />
+        <div class="form-group"><label class="form-label">Ad (AZ)</label><input id="ingAz" class="form-control" required /></div>
+        <div class="form-group"><label class="form-label">Ad (EN)</label><input id="ingEn" class="form-control" required /></div>
+        <div class="form-group"><label class="form-label">Ad (RU)</label><input id="ingRu" class="form-control" required /></div>
+        <div class="form-group"><label class="form-label">Ad (TR)</label><input id="ingTr" class="form-control" required /></div>
+        <div class="form-group">
+          <label class="form-label">İnqrediyent Şəkli</label>
+          <label class="upload-zone" style="display:block; padding:12px;">
+            <input type="file" id="ingImageInput" accept="image/*" style="display:none;" />
+            <span style="color:var(--gold-light); font-size:13px;">📱 Qalereyadan şəkil seç</span>
+          </label>
+          <img id="ingImagePreview" src="" alt="" style="width:64px; height:64px; border-radius:12px; object-fit:cover; margin-top:8px; display:none;" />
+        </div>
+        <button type="submit" class="btn btn-gold btn-block">Yadda Saxla</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="/js/admin.js"></script>
+</body>
+</html>

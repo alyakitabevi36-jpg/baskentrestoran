@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>BAŞKENT RESTORAN — QR Menyu</title>
+  <meta name="theme-color" content="#0a0a0c" />
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/menu" class="brand">
+        <div class="brand-crest">B</div>
+        <div class="brand-text">
+          <h1>BAŞKENT RESTORAN</h1>
+          <span id="headerSubtitle">QR MENYU</span>
+        </div>
+      </a>
+      <div class="lang-switcher" role="group" aria-label="Language">
+        <button class="lang-btn active" data-lang="az">AZ</button>
+        <button class="lang-btn" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="ru">RU</button>
+        <button class="lang-btn" data-lang="tr">TR</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="menu-hero">
+    <div class="hero-badge" id="heroBadge">PREMIUM MƏTBƏX</div>
+    <h2 id="heroTitle">Zövqün və Ləzzətin Ünvanı</h2>
+    <p id="heroDesc">Ənənəvi reseptlər, seçilmiş təbii inqrediyentlər və müasir təqdimat.</p>
+  </section>
+
+  <div class="search-wrap">
+    <div class="search-box">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input type="search" id="searchInput" class="search-input" placeholder="Yemək və ya inqrediyent axtar..." />
+    </div>
+  </div>
+
+  <nav class="categories-bar">
+    <div class="categories-scroll" id="categoriesBar"></div>
+  </nav>
+
+  <main class="menu-container" id="menuContainer">
+    <div class="empty-state">Yüklənir...</div>
+  </main>
+
+  <footer style="text-align:center; padding: 20px 16px 36px; color: var(--text-muted); font-size: 12px; border-top: 1px solid rgba(255,255,255,0.05);">
+    <span id="footerNote">BAŞKENT RESTORAN • Bütün hüquqlar qorunur</span>
+  </footer>
+
+  <!-- Dish Detail Modal -->
+  <div class="detail-overlay" id="detailOverlay" aria-hidden="true">
+    <article class="detail-card" id="detailCard">
+      <div class="detail-topbar">
+        <button class="back-btn" id="closeDetailBtn">
+          <span>←</span>
+          <span id="backBtnLabel">Menyuya qayıt</span>
+        </button>
+        <span class="dish-status-badge" id="detailStatusBadge"></span>
+      </div>
+      <div class="gallery-main">
+        <img id="detailMainImg" src="" alt="" />
+      </div>
+      <div class="gallery-thumbs" id="detailThumbs"></div>
+      <div class="detail-content">
+        <div class="detail-header-row">
+          <h2 class="detail-title" id="detailTitle"></h2>
+          <div class="detail-price" id="detailPrice"></div>
+        </div>
+        <p class="detail-desc" id="detailDesc"></p>
+
+        <div id="detailIngredientsWrap">
+          <div class="detail-section-title" id="ingredientsSectionTitle">Tərkibi və İnqrediyentlər</div>
+          <div class="ingredients-grid" id="detailIngredients"></div>
+        </div>
+
+        <div class="allergen-box" id="detailAllergensBox" style="display:none;">
+          <strong id="allergensSectionTitle">Allergiya Məlumatı:</strong>
+          <span id="detailAllergensText"></span>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <script src="/js/i18n.js"></script>
+  <script src="/js/menu.js"></script>
+</body>
+</html>

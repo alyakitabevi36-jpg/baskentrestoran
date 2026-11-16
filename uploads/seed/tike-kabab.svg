@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#140E0C"/>
+      <stop offset="100%" stop-color="#241612"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="45%" r="45%">
+      <stop offset="0%" stop-color="#D4AF37" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#D4AF37" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <rect width="800" height="600" fill="url(#glow)"/>
+  <circle cx="400" cy="275" r="185" fill="#141418" stroke="#D4AF37" stroke-width="4"/>
+  <circle cx="400" cy="275" r="165" fill="#1C1C22" stroke="#D4AF37" stroke-width="1.5" stroke-opacity="0.5"/>
+  <g transform="translate(400,275)"><line x1="-115" y1="0" x2="115" y2="0" stroke="#C0C0C0" stroke-width="6" stroke-linecap="round"/>
+   <rect x="-85" y="-24" width="38" height="48" rx="10" fill="#7A2E22" stroke="#4E1A12" stroke-width="2"/>
+   <rect x="-35" y="-26" width="42" height="52" rx="10" fill="#8E382A" stroke="#4E1A12" stroke-width="2"/>
+   <rect x="20" y="-24" width="38" height="48" rx="10" fill="#7A2E22" stroke="#4E1A12" stroke-width="2"/>
+   <circle cx="72" cy="0" r="16" fill="#D93829"/></g>
+  <text x="400" y="525" text-anchor="middle" fill="#D4AF37" font-family="Georgia, serif" font-size="24" letter-spacing="4" font-weight="bold">BAŞKENT RESTORAN</text>
+  <text x="400" y="555" text-anchor="middle" fill="#F5F5F0" fill-opacity="0.7" font-family="sans-serif" font-size="16" letter-spacing="2">TİKƏ KABAB</text>
+</svg>

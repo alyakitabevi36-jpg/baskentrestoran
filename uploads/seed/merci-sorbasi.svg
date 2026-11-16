@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#16110B"/>
+      <stop offset="100%" stop-color="#261B0E"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="45%" r="45%">
+      <stop offset="0%" stop-color="#E59A38" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#E59A38" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <rect width="800" height="600" fill="url(#glow)"/>
+  <circle cx="400" cy="275" r="185" fill="#141418" stroke="#D4AF37" stroke-width="4"/>
+  <circle cx="400" cy="275" r="165" fill="#1C1C22" stroke="#D4AF37" stroke-width="1.5" stroke-opacity="0.5"/>
+  <g transform="translate(400,275)"><ellipse cx="0" cy="10" rx="105" ry="70" fill="#F5EFE6" stroke="#D4AF37" stroke-width="3"/>
+   <ellipse cx="0" cy="10" rx="88" ry="56" fill="#D97B29"/>
+   <ellipse cx="-25" cy="0" rx="22" ry="12" fill="#E89A48" fill-opacity="0.6"/>
+   <path d="M-20,-35 Q-15,-55 -25,-70 M15,-35 Q20,-55 10,-70" stroke="#F5EFE6" stroke-width="3" fill="none" stroke-opacity="0.5" stroke-linecap="round"/></g>
+  <text x="400" y="525" text-anchor="middle" fill="#D4AF37" font-family="Georgia, serif" font-size="24" letter-spacing="4" font-weight="bold">BAŞKENT RESTORAN</text>
+  <text x="400" y="555" text-anchor="middle" fill="#F5F5F0" fill-opacity="0.7" font-family="sans-serif" font-size="16" letter-spacing="2">MƏRCİ ŞORBASI</text>
+</svg>
